@@ -1,0 +1,109 @@
+<div>
+    <form [formGroup]="userData" novalidate (ngSubmit)="Register()">
+        <div>
+            <div>
+                <label>email</label>
+                <div>
+                    <input
+                        name="email"
+                        placeholder="enter your email"
+                        formControlName="email"
+                    />
+                    <div
+                        class="alert-group"
+                        *ngIf="userData.controls['email'].touched"
+                    >
+                        <div *ngIf="userData.controls['email'].pristine">
+                            email is required
+                        </div>
+                        <div
+                            *ngIf="
+                                userData.controls['email'].invalid &&
+                                userData.controls['email'].dirty
+                            "
+                        >
+                            Invalid email
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div formGroupName="passwords">
+        <div class="input-group">
+            <label>Password</label>
+            <input
+                name="password"
+                placeholder="enter your password"
+                formControlName="password"
+                type="password"
+            />
+            <div class="alert-group">
+                <div
+                    *ngIf="
+                   passwords.controls['password'].pristine &&
+                   userData.controls['passwords'].controls['password'].touched
+                    "
+                >
+                    Password is required
+                </div>
+                <div
+                    *ngIf="
+                    userData.controls['passwords'].controls['password'].touched &&
+                    userData.controls['passwords'].controls['password'].hasError('minlength')
+                    "
+                >
+                    Password must have at least 8 symbols
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>Confirm password</label>
+            <input
+                name="confirmPassword"
+                placeholder="confirm your password"
+                formControlName="confirmPassword"
+                type="password"
+            />
+            <div class = "alert-group">
+            <div
+                *ngIf="
+                    userData.controls['passwords'].controls['confirmPassword'].touched &&
+                    userData.controls['passwords'].hasError('notMatching')
+                "
+            >
+                Passwords don't match
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="input-group">
+            <input
+                name="phoneNumber"
+                formControlName="phoneNumber"
+                [textMask]="{ mask: phoneMask }"
+                placeholder="(000)-000-0000"
+            />
+            <div
+                class="alert-group"
+                *ngIf="
+                    userData.controls['phoneNumber'].touched &&
+                    !userData.controls['email'].dirty
+                "
+            >
+                Phone number is required
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input name="name" formControlName="name" />
+            <div class="alert-group" *ngIf="userData.controls['email'].touched">
+                Name can include only letters
+            </div>
+        </div>
+
+        <button class="button" [disabled]="userData.invalid" type="submit">
+            Send
+        </button>
+    </form>
+</div>

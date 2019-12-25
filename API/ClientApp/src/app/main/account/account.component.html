@@ -1,0 +1,25 @@
+<div>
+<label>Change password</label>
+<form [formGroup]="passwordForm" novalidate (ngSubmit)="UpdateUserPassword()">
+<input type="password" formControlName="oldPassword" placeholder="old password">
+<div formGroupName="newPasswords">
+
+    <input type="password" formControlName="password" placeholder="new password">
+    <input type="password" formControlName="confirmPassword" placeholder="confirm password">
+</div>
+<button type="submit" [disabled]="passwordForm.invalid">Update</button>
+</form>
+
+<form [formGroup]="personalInfoForm" novalidate (ngSubmit)="UpdateUserInfo()">
+    <label>Name</label>
+    <input type="text" formControlName="name">
+    <div class="alert-group" *ngIf="personalInfoForm.controls['name'].touched &&
+    (personalInfoForm.controls['name'].hasError('minlength') || personalInfoForm.controls['name'].hasError('maxlength'))" >
+        Name must have minimum 3 letters and 15 maximum
+    </div>
+    <label>Phone number</label>
+<input type="text" formControlName="phoneNumber">
+<button type="submit" [disabled]="personalInfoForm.invalid">Update</button>
+</form>
+</div>
+

@@ -1,0 +1,55 @@
+<div class="header">
+    <div class="header__nav-item">
+        <div class="header__item">
+            <a
+                class="header__link"
+                routerLinkActive="active-link"
+                routerLink="dashboard"
+            >
+                Dashboard
+            </a>
+        </div>
+        <div class="header__item">
+            <a
+                class="header__link"
+                routerLinkActive="active-link"
+                routerLink="search"
+            >
+                Search
+            </a>
+        </div>
+
+        <div class="header__item">
+            <a
+                class="header__link"
+                routerLinkActive="active-link"
+                routerLink="create"
+            >
+                Create
+            </a>
+        </div>
+        <div class="header__item" [hidden]="true">
+            <a
+                class="header__link"
+                routerLinkActive="active-link"
+                routerLink="/admin"
+            >
+                Admin
+            </a>
+        </div>
+        <div class="header__item">
+            <a
+                class="header__link"
+                routerLinkActive="active-link"
+                routerLink="account"
+            >
+                Account
+            </a>
+        </div>
+        <div class="header__user-info">
+            <div class="header__logout" (click)="logOut()">
+                <i class="fa fa-sign-out-alt"></i>
+            </div>
+        </div>
+    </div>
+</div>

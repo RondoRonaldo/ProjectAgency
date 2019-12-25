@@ -1,0 +1,33 @@
+<div>{{ requestData.header }}</div>
+<div>{{ requestData.body }}</div>
+<div>
+    <label>Total square</label>
+    {{ requestData.square }}
+</div>
+<div>
+    <label>Number of rooms</label>
+    {{ requestData.numberOfRooms }}
+</div>
+<div>{{ requestData.creationDate | date: "yyyy/mm/dd" }}</div>
+
+<ng-container *ngFor="let item of requestData.comments">
+    <div>
+        <label>Name</label>
+        {{item.userInfo.name}}
+        <label>phoneNumber</label>
+        {{item.userInfo.phoneNumber}}
+        <div>
+            {{ item.body }}
+        </div>
+    </div>
+</ng-container>
+
+<form>
+    <label>Enter your comment</label>
+    <input
+        type="text"
+        name="Comment"
+        [(ngModel)]="commentData.body"
+    />
+    <button type="button" (click)="addComment()">Send</button>
+</form>

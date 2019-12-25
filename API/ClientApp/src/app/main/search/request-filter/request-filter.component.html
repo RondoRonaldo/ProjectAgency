@@ -1,0 +1,46 @@
+<!-- <div class="row">  <div class="col-xs-2">
+    <div class="col-md-2"> -->
+
+<div>
+    <div [hidden]="!isAdmin">
+        <mat-radio-group [(ngModel)]="filter.isAccepted">
+            <mat-radio-button [value]="true">Accepted</mat-radio-button>
+            <mat-radio-button [value]="false">Unaccepted</mat-radio-button>
+        </mat-radio-group>
+
+        <mat-radio-group [(ngModel)]="filter.isModerated">
+            <mat-radio-button [value]="true">Moderated</mat-radio-button>
+            <mat-radio-button [value]="false">Unmoderated</mat-radio-button>
+        </mat-radio-group>
+    </div>
+
+    <label>Square</label>
+
+    <div class="row">
+        <div class="col-md-5">
+            <input type="text" [(ngModel)]="filter.squareFrom" class="inputs" />
+        </div>
+
+        <div class="col-md-5">
+            <input type="text" [(ngModel)]="filter.squareTo" class="inputs" />
+        </div>
+    </div>
+
+    <label>Number of rooms</label>
+    <input type="text" [(ngModel)]="filter.numberOfRoomsFrom" />
+    <input type="text" [(ngModel)]="filter.numberOfRoomsTo" />
+    <label>Creation date</label>
+    <input type="date" [(ngModel)]="filter.dateFrom" />
+    <input type="date" [(ngModel)]="filter.dateTo" />
+
+    <mat-radio-group [(ngModel)]="filter.isForRent">
+        <mat-radio-button [value]="true">Rent</mat-radio-button>
+        <mat-radio-button [value]="false">Sale</mat-radio-button>
+    </mat-radio-group>
+    <select [(ngModel)]="filter.district">
+        <ng-container *ngFor="let item of districts">
+            <option [value]="item.name">{{ item.name }}</option>
+        </ng-container>
+    </select>
+    <button type="button" (click)="getResults()">Send</button>
+</div>

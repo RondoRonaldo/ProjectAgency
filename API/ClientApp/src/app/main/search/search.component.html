@@ -1,0 +1,26 @@
+<div>
+    <div class="row">
+        <div class="col-md-2">
+            <div class="filter">
+            <app-request-filter
+                #adminFilter
+                [pageSize]="pagination.pageSize"
+            ></app-request-filter>
+        </div>
+    </div>
+        <div class="col-md-7">
+            <app-request-dashboard></app-request-dashboard>
+        </div>
+    </div>
+    <div class="pagination">
+        <app-pagination
+            #pagination
+            [totalRecords]="adminFilter.totalRecords"
+            (onPageChanged)="adminFilter.onPageChanged($event)"
+        >
+        </app-pagination>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col-md-2"> -->

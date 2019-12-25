@@ -1,0 +1,18 @@
+mat-nav-list {
+    width: 60%;
+    mat-list-item {
+        height: 100%;
+        cursor: auto;
+
+        app-request-list-item {
+            width: 100%;
+        }
+    }
+}
+.page{
+margin-left: 15%;
+margin-right: 15%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    box-shadow: inset;
+}

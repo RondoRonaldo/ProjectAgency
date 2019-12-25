@@ -1,0 +1,32 @@
+<div class="creator">
+    <form [formGroup]="requestData" novalidate (ngSubmit)="CreateRequest()">
+        <mat-form-field class="login-form__field-set">
+            <input matInput formControlName="header" placeholder="Header" />
+        </mat-form-field>
+        <mat-form-field class="login-form__field-set">
+            <textarea  matInput formControlName="body" placeholder="Body" >
+        </textarea>
+        </mat-form-field>
+        <mat-form-field class="login-form__field-set">
+            <input matInput formControlName="square" placeholder="Square" />
+        </mat-form-field>
+        <mat-form-field class="login-form__field-set">
+            <input matInput formControlName="numberOfRooms" placeholder="Number of rooms"/>
+        </mat-form-field>
+
+        <mat-form-field class="login-form__field-set" >
+            <mat-select formControlName="district" placeholder="district">
+                <ng-container *ngFor="let item of districts">
+                    <mat-option value="item.name">{{ item.name }}</mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+        <div>
+            <mat-radio-group formControlName="isForRent">
+                <mat-radio-button value="true">Rent</mat-radio-button>
+                <mat-radio-button value="false">Sell</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <button type="submit">Send</button>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+<div class="page">
+    <mat-nav-list [disableRipple]="true">
+        <mat-list-item
+            [disableRipple]="true"
+            *ngFor="
+                let item of requestRecords.records
+                    | slice
+                        : (page - 1) * pageSize
+                        : (page - 1) * pageSize + pageSize
+            "
+        >
+            <app-request-list-item [item]="item" [displayPersonalInfo]="true"></app-request-list-item>
+        </mat-list-item>
+    </mat-nav-list>
+
+    <ngb-pagination
+        [collectionSize]="requestRecords.totalRecords"
+        [(page)]="page"
+        [maxSize]="5"
+        [pageSize]="pageSize"
+        [rotate]="true"
+        [ellipses]="false"
+        [boundaryLinks]="true"
+    ></ngb-pagination>
+</div>

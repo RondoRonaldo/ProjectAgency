@@ -1,0 +1,16 @@
+.request-container {
+    padding: 10px;
+    background-color: lightgray;
+    border: 0.5px solid darkgray;
+    margin-bottom: 5px;
+
+    .row {
+        margin: 0px;
+
+        h4 {
+            a {
+                color: #0366d6;
+            }
+        }
+    }
+}

@@ -1,0 +1,33 @@
+@import '../../../assets/styles/color.variables.scss';
+.header {
+	display: flex;
+	justify-content: space-between;
+	height: 50px;
+	color: $primary-title-font-color;
+	background: $primary-application-color;
+	&__nav-item {
+		display: flex;
+	}
+	&__item {
+		font-size: 20px;
+		margin: 0 20px;
+		align-self: center;
+		border: transparent 2px solid;
+		&:hover {
+			border-bottom: $primary-title-font-color 2px solid;
+		}
+	}
+	&__logout {
+		margin: 10px;
+		padding: 10px;
+		cursor: pointer;
+	}
+	&__link {
+		text-decoration: none;
+		color: $primary-title-font-color;
+		cursor: pointer;
+	}
+	.active-link {
+		border-bottom: $primary-title-font-color 2px solid;
+	}
+}

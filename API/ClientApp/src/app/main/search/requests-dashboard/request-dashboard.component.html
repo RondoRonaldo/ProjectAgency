@@ -1,0 +1,40 @@
+<ng-container *ngFor="let item of data">
+    <div class="request-container">
+    <div class="row">
+        <h4>
+            <a [routerLink]="[item.id]">{{ item.header }}</a>
+        </h4>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            {{ item.body }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            {{ item.district }}
+        </div>
+        <div class="col-md-1">
+            {{ item.isForRent ? "Rent" : "Sale" }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label>Square -</label>
+            {{ item.square }} m<sup>2</sup>
+        </div>
+        <div class="col-md-2">
+            <label>Rooms</label>
+            {{ item.numberOfRooms }}
+        </div>
+        <div class="date">
+            {{ item.creationDate | date: "yyyy LLLL dd" }}
+        </div>
+    </div>
+    <div [hidden]="!isAdmin">
+        <button (click)="moderateRequest(item.id, true)">Accept</button>
+        <button (click)="moderateRequest(item.id, false)">Decline</button>
+    </div>
+</div>
+</ng-container>
