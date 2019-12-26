@@ -9,7 +9,7 @@ import { MainService } from '../main.service';
     styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-
+public isAdmin = false;
     constructor(private _exit: LogoutService,private router: Router,private _mainService: MainService) {}
     public logOut() {
         this._exit.logOut().subscribe(()=>

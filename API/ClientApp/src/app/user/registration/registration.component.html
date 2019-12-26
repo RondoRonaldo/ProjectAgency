@@ -1,109 +1,117 @@
-<div>
-    <form [formGroup]="userData" novalidate (ngSubmit)="Register()">
-        <div>
-            <div>
-                <label>email</label>
-                <div>
-                    <input
-                        name="email"
-                        placeholder="enter your email"
-                        formControlName="email"
-                    />
-                    <div
-                        class="alert-group"
-                        *ngIf="userData.controls['email'].touched"
-                    >
-                        <div *ngIf="userData.controls['email'].pristine">
-                            email is required
-                        </div>
-                        <div
-                            *ngIf="
-                                userData.controls['email'].invalid &&
-                                userData.controls['email'].dirty
-                            "
-                        >
-                            Invalid email
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<div formGroupName="passwords">
-        <div class="input-group">
-            <label>Password</label>
+<div class="registration">
+    <form class="registration-form" [formGroup]="userData" novalidate>
+        <mat-form-field class="registration-form__field-set">
             <input
-                name="password"
-                placeholder="enter your password"
-                formControlName="password"
-                type="password"
+                matInput
+                placeholder="enter your email"
+                formControlName="email"
+                name="email"
             />
-            <div class="alert-group">
-                <div
+            <mat-error *ngIf="userData.controls['email'].touched">
+                <mat-error *ngIf="userData.controls['email'].pristine">
+                    email is required
+                </mat-error>
+                <mat-error
                     *ngIf="
-                   passwords.controls['password'].pristine &&
-                   userData.controls['passwords'].controls['password'].touched
+                        userData.controls['email'].invalid &&
+                        userData.controls['email'].dirty
+                    "
+                >
+                    Invalid email
+                </mat-error>
+            </mat-error>
+        </mat-form-field>
+
+        <form formGroupName="passwords">
+            <mat-form-field class="registration-form__field-set">
+                <input
+                    matInput
+                    class="registration-form__field-input"
+                    placeholder="Enter your password"
+                    formControlName="password"
+                    name="password"
+                    [type]="showPassword ? 'text' : 'password'"
+                />
+
+                <mat-error
+                    *ngIf="
+                        passwords.controls['password'].pristine &&
+                        userData.controls['passwords'].controls['password']
+                            .touched
                     "
                 >
                     Password is required
-                </div>
-                <div
+                </mat-error>
+                <mat-error
                     *ngIf="
-                    userData.controls['passwords'].controls['password'].touched &&
-                    userData.controls['passwords'].controls['password'].hasError('minlength')
+                        userData.controls['passwords'].controls['password']
+                            .touched &&
+                        userData.controls['passwords'].controls[
+                            'password'
+                        ].hasError('minlength')
                     "
                 >
                     Password must have at least 8 symbols
-                </div>
-            </div>
-        </div>
+                </mat-error>
+            </mat-form-field>
 
-        <div class="input-group">
-            <label>Confirm password</label>
+            <mat-form-field class="registration-form__field-set">
+                <input
+                    matInput
+                    name="confirmPassword"
+                    placeholder="confirm your password"
+                    formControlName="confirmPassword"
+                    [type]="showPassword ? 'text' : 'password'"
+                />
+                <mat-icon matSuffix (click)="showPassword = !showPassword">{{
+                    showPassword ? "visibility" : "visibility_off"
+                }}</mat-icon>
+                <mat-error
+                    *ngIf="
+                        passwords.controls['confirmPassword'].touched &&
+                        passwords.hasError('notMatching')
+                    "
+                >
+                    Passwords don't match
+                </mat-error>
+            </mat-form-field>
+        </form>
+
+        <mat-form-field class="registration-form__field-set">
             <input
-                name="confirmPassword"
-                placeholder="confirm your password"
-                formControlName="confirmPassword"
-                type="password"
-            />
-            <div class = "alert-group">
-            <div
-                *ngIf="
-                    userData.controls['passwords'].controls['confirmPassword'].touched &&
-                    userData.controls['passwords'].hasError('notMatching')
-                "
-            >
-                Passwords don't match
-            </div>
-        </div>
-    </div>
-</div>
-        <div class="input-group">
-            <input
-                name="phoneNumber"
+                matInput
                 formControlName="phoneNumber"
                 [textMask]="{ mask: phoneMask }"
-                placeholder="(000)-000-0000"
+                placeholder="Enter telephone number"
             />
-            <div
-                class="alert-group"
+            <mat-error
                 *ngIf="
                     userData.controls['phoneNumber'].touched &&
                     !userData.controls['email'].dirty
                 "
             >
                 Phone number is required
-            </div>
-        </div>
+            </mat-error>
+        </mat-form-field>
 
-        <div class="input-group">
-            <input name="name" formControlName="name" />
-            <div class="alert-group" *ngIf="userData.controls['email'].touched">
-                Name can include only letters
-            </div>
-        </div>
+        <mat-form-field class="registration-form__field-set">
+            <input matInput formControlName="name" placeholder="Enter name" />
+            <mat-error *ngIf="userData.controls['email'].touched">
+                Name can include only letters >
+            </mat-error>
+        </mat-form-field>
 
-        <button class="button" [disabled]="userData.invalid" type="submit">
-            Send
-        </button>
+        <div class="registration-form__controls">
+            <button
+                mat-raised-button
+                color=""
+                class="registration-form__button"
+                (click)="Register()"
+                type="submit"
+                [disabled]="userData.invalid"
+            >
+                Sign up
+            </button>
+        </div>
     </form>
 </div>

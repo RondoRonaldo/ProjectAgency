@@ -1,5 +1,5 @@
 <div class="login">
-	<form class="login-form" [formGroup]="userData">
+	<form class="login-form" novalidate [formGroup]="userData" >
 
 		<mat-form-field class="login-form__field-set">
 			<input matInput formControlName ="email" placeholder="Email">
@@ -19,40 +19,14 @@
 			</mat-error>
         </mat-form-field>
 
-        <mat-slide-toggle name="isPersistent" color="primary" formControlName="isPersistent">
+        <mat-slide-toggle name="isPersistent" color="" formControlName="isPersistent">
 			Remember me
 		</mat-slide-toggle>
-        <!-- <mat-slide-toggle >
-			Remember me
-        </mat-slide-toggle> -->
+
 
         <div class="login-form__controls">
-			<button mat-raised-button color="primary" class="login-form__button" (click)="SignIn()" type="submit"> Sign In </button>
+			<button mat-flat-button color="mat-blue-grey" class="login-form__button" (click)="SignIn()" type="submit" background-color: red> Sign In </button>
 		</div>
-
-		<!-- <mat-form-field class="login-form__field-set">
-			<input class="login-form__field-input" [formControl]="passwordFormControl" matInput name="password" [(ngModel)]="userCredentials.password"
-			 placeholder="Enter your password" [type]="showPassword ? 'password' : 'text'">
-			<mat-icon matSuffix (click)="showPassword = !showPassword">{{showPassword ? 'visibility' : 'visibility_off'}}</mat-icon>
-			<mat-error *ngIf="passwordFormControl.hasError('required')">
-				Password is required
-			</mat-error>
-		</mat-form-field>
-
-
-
-		<div class="login-form__controls">
-			<button mat-raised-button color="primary" class="login-form__button" (click)="onSignIn()" type="submit"> Sign In </button>
-		</div>
-
-		<div class="login-form__links">
-			<a class="login-form__link" routerLink="../registration">
-				New user?
-			</a>
-			<a class="login-form__link">
-				Forgot a password?
-			</a>
-		</div> -->
 
 	</form>
 </div>
@@ -68,14 +42,3 @@
 
 
 
-
-
-<!-- <div class="container">
-    <div>
-      <input type="email" placeholder="Enter Email" [(ngModel)]="userData.email" />
-      <input type="password" placeholder="Enter Password" [(ngModel)]="userData.password" />
-      <button (click)="SignIn()">Sign In</button>
-    </div>
-  </div>
-
- -->

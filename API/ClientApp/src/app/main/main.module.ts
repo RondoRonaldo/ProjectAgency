@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatFormFieldModule, MatInputModule, MatRadioButton, MatRadioModule, MatListModule, MatSelectModule, MatIconModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatRadioButton, MatRadioModule, MatListModule, MatSelectModule, MatIconModule, MatButtonModule, MatDatepicker, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
 import { MainService } from './main.service';
@@ -31,7 +31,10 @@ import { RequestListItemComponent } from './dashboard/manager-requests/request-l
         MatRadioModule,
         MatListModule,
         MatSelectModule,
-        MatIconModule
+        MatIconModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MatNativeDateModule
 
 
     ],

@@ -1,0 +1,64 @@
+@import '../../../assets/styles/color.variables.scss';
+.registration {
+		display: flex;
+		justify-content: center;
+		.registration-form {
+				padding: 15px;
+				background: rgba(255, 255, 255, 0.7);
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
+				width: 400px;
+                height: 600px;
+                border-radius: 25px;
+				margin-top: 5%;
+				&__field {
+						&-set {
+                            input:-webkit-autofill,
+                            input:-webkit-autofill:hover,
+                            input:-webkit-autofill:focus,
+                            input:-webkit-autofill:active {
+                                transition: background-color 5000s ease-in-out 0s;
+                            }
+								width: 100%;
+								display: flex;
+								margin: 20px 0;
+								&--with-password-hint {
+										margin-bottom: 5px;
+								}
+								&--password-hint {
+										margin-top: 5px;
+								}
+						}
+						&-password-hint {
+								margin-top: 5px;
+						}
+						&-input {
+								width: 100%;
+						}
+				}
+				&__button {
+						margin-top: 30px;
+						width: 100%;
+						padding: 5px;
+				}
+				&__links {
+						display: flex;
+						justify-content: space-around;
+						margin-top: 30px;
+				}
+				&__link {
+						text-decoration: none;
+						color: $primary-text-color;
+						cursor: pointer;
+						&:hover {
+								text-decoration: underline;
+						}
+						&:active {
+								text-decoration: none;
+						}
+				}
+		}
+		.mat-form-field-infix,
+		.mat-form-field-wrapper {
+				width: 100% !important;
+		}
+}

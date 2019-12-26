@@ -10,7 +10,6 @@ import { passwordMatchValidator } from './registration.validators';
     providers: [RegistrationService, FormBuilder]
 })
 export class RegistrationComponent  {
-
     public userData: FormGroup;
 public passwords: FormGroup;
 

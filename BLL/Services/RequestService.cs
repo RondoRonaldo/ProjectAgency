@@ -151,22 +151,7 @@ namespace BLL.Services
             result = result.Where(exp => exp.IsAccepted && exp.IsModerated);
             return await Search(result, model);
         }
-
-        private async Task<OperationDetails> RemoveAsync(RequestEntity result)
-        {
-            _uow.RequestRepository.Remove(result);
-            await _uow.SaveAsync();
-            return new OperationDetails(true, "Request was deleted", string.Empty);
-        }
-
-        private async Task<OperationDetails> UpdateAsync(RequestUpdateModel model)
-        {
-            var result = _mapper.Map<RequestEntity>(model);
-            _uow.RequestRepository.Update(result);
-            await _uow.SaveAsync();
-            return new OperationDetails(true, "Request was updated", string.Empty);
-        }
-
+        
         private async Task<PageResponseModel<RequestDashboardModel>> Search(IQueryable<RequestEntity> result,
             IPageRequestModel<UserFilterModel> model)
         {
@@ -205,7 +190,7 @@ namespace BLL.Services
                 result = result.Where(exp => exp.IsForRent == model.Request.IsForRent);
             }
 
-            if (model.Request.District != null)
+            if (!string.IsNullOrEmpty(model.Request.District))
             {
                 result = result.Where(exp => exp.District.Name == model.Request.District);
             }
@@ -215,6 +200,20 @@ namespace BLL.Services
                 _mapper.Map<IEnumerable<RequestDashboardModel>>(resultsPerPage), result.Count());
         }
 
+        private async Task<OperationDetails> RemoveAsync(RequestEntity result)
+        {
+            _uow.RequestRepository.Remove(result);
+            await _uow.SaveAsync();
+            return new OperationDetails(true, "Request was deleted", string.Empty);
+        }
+
+        private async Task<OperationDetails> UpdateAsync(RequestUpdateModel model)
+        {
+            var result = _mapper.Map<RequestEntity>(model);
+            _uow.RequestRepository.Update(result);
+            await _uow.SaveAsync();
+            return new OperationDetails(true, "Request was updated", string.Empty);
+        }
 
         public async Task<OperationDetails> ModerateRequestAsync(RequestModerationModel model)
         {

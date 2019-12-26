@@ -6,7 +6,8 @@
 	color: $primary-title-font-color;
 	background: $primary-application-color;
 	&__nav-item {
-		display: flex;
+        display: flex;
+        width: 100%;
 	}
 	&__item {
 		font-size: 20px;
@@ -19,14 +20,19 @@
 	}
 	&__logout {
 		margin: 10px;
-		padding: 10px;
-		cursor: pointer;
+		padding-right: 10px;
+        cursor: pointer;
 	}
 	&__link {
 		text-decoration: none;
 		color: $primary-title-font-color;
 		cursor: pointer;
-	}
+    }
+    &__user-info{
+        justify-content: flex-end;
+    flex: 1;
+    display: flex;
+    }
 	.active-link {
 		border-bottom: $primary-title-font-color 2px solid;
 	}

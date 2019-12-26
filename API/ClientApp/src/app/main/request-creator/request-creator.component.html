@@ -1,12 +1,16 @@
 <div class="creator">
     <form [formGroup]="requestData" novalidate (ngSubmit)="CreateRequest()">
+        <div class="row">
         <mat-form-field class="login-form__field-set">
             <input matInput formControlName="header" placeholder="Header" />
         </mat-form-field>
+    </div>
+        <div class="row">
         <mat-form-field class="login-form__field-set">
             <textarea  matInput formControlName="body" placeholder="Body" >
-        </textarea>
+            </textarea>
         </mat-form-field>
+    </div>
         <mat-form-field class="login-form__field-set">
             <input matInput formControlName="square" placeholder="Square" />
         </mat-form-field>

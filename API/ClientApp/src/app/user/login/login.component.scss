@@ -1,8 +1,9 @@
 @import '../../../assets/styles/color.variables.scss';
 .login {
-		display: flex;
+        display: flex;
 		justify-content: center;
 		.login-form {
+            border-radius: 25px;
 				padding: 15px;
 				background: rgba(255, 255, 255, 0.7);
 				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.01), 0 6px 20px 0 rgba(0, 0, 0, 0.05);
@@ -38,23 +39,14 @@
 						margin-top: 30px;
 						width: 100%;
 						padding: 5px;
-				}
+                }
+
 				&__links {
 						display: flex;
 						justify-content: space-around;
 						margin-top: 30px;
 				}
-				&__link {
-						text-decoration: none;
-						color: $primary-text-color;
-						cursor: pointer;
-						&:hover {
-								text-decoration: underline;
-						}
-						&:active {
-								text-decoration: none;
-						}
-				}
+
 		}
 		.mat-form-field-infix,
 		.mat-form-field-wrapper {
