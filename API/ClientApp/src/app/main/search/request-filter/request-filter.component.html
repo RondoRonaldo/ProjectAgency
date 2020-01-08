@@ -1,84 +1,120 @@
-<!-- <div class="row">  <div class="col-xs-2">
-    <div class="col-md-2"> -->
-
 <div class="filter">
     <div [hidden]="!isAdmin">
-        <div class="divs">
+        <div class="border-05px">
             <mat-radio-group [(ngModel)]="filter.isAccepted" class="radio">
-                <div class="row">
-                    <mat-radio-button [value]="true">Accepted</mat-radio-button>
-                </div>
-                <div class="row">
-                    <mat-radio-button class="row" [value]="false"
-                        >Unaccepted</mat-radio-button
-                    >
-                </div>
-                <div class="row">
-                    <mat-radio-button class="row" [value]=""
-                        >All</mat-radio-button
-                    >
-                </div>
+                <mat-radio-button class="__button" [value]="true"
+                    >Accepted</mat-radio-button
+                >
+                <mat-radio-button class="__button" [value]="false"
+                    >Unaccepted</mat-radio-button
+                >
+                <mat-radio-button class="__button" [value]=""
+                    >All</mat-radio-button
+                >
             </mat-radio-group>
         </div>
-        <mat-radio-group [(ngModel)]="filter.isModerated" class="radio">
-            <mat-radio-button class="row" [value]="true"
-                >Moderated</mat-radio-button
+        <div class="border-05px">
+            <mat-radio-group [(ngModel)]="filter.isModerated" class="radio">
+                <mat-radio-button class="__button" [value]="true"
+                    >Moderated</mat-radio-button
+                >
+                <mat-radio-button class="__button" [value]="false"
+                    >Unmoderated</mat-radio-button
+                >
+                <mat-radio-button class="__button" [value]=""
+                    >All</mat-radio-button
+                >
+            </mat-radio-group>
+        </div>
+    </div>
+
+    <fieldset class="border p-2">
+        <legend class="w-auto">Square</legend>
+        <div class="row">
+            <mat-form-field class="col-md-3">
+                <input
+                    matInput
+                    type="text"
+                    placeholder="from"
+                    [(ngModel)]="filter.squareFrom"
+                />
+            </mat-form-field>
+            <mat-form-field class="col-md-3">
+                <input
+                    matInput
+                    type="text"
+                    placeholder="to"
+                    [(ngModel)]="filter.squareTo"
+                />
+            </mat-form-field>
+        </div>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend class="w-auto">Number of rooms</legend>
+        <mat-form-field>
+            <input
+                matInput
+                type="text"
+                placeholder="from"
+                [(ngModel)]="filter.numberOfRoomsFrom"
+            />
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput  placeholder="to" type="text" [(ngModel)]="filter.numberOfRoomsTo" />
+        </mat-form-field>
+    </fieldset>
+    <fieldset class="border p-2">
+        <legend class="w-auto">Creation date</legend>
+
+        <mat-form-field>
+            <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="from"
+                [(ngModel)]="filter.dateFrom"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input
+                matInput
+                [matDatepicker]="picker2"
+                placeholder="to"
+                [(ngModel)]="filter.dateTo"
+            />
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="picker2"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+    </fieldset>
+    <div class="border-05px">
+        <mat-radio-group class="radio" [(ngModel)]="filter.isForRent">
+            <mat-radio-button class="__button" [value]="true"
+                >Rent</mat-radio-button
             >
-            <mat-radio-button class="row" [value]="false"
-                >Unmoderated</mat-radio-button
+            <mat-radio-button class="__button" [value]="false"
+                >Sale</mat-radio-button
             >
-            <mat-radio-button class="row" [value]="">All</mat-radio-button>
         </mat-radio-group>
     </div>
-
-    <label>Square</label>
-
-    <div class="row">
-        <mat-form-field>
-            <div class="col-md-5">
-                <input
-                    matInput
-                    type="text"
-                    [(ngModel)]="filter.squareFrom"
-                    class="inputs"
-                />
-            </div>
-
-            <div class="col-md-5">
-                <input
-                    matInput
-                    type="text"
-                    [(ngModel)]="filter.squareTo"
-                    class="inputs"
-                />
-            </div>
-        </mat-form-field>
-    </div>
-    <mat-form-field>
-        <mat-label>Number of rooms</mat-label>
-        <input matInput type="text" [(ngModel)]="filter.numberOfRoomsFrom" />
-        <input matInput type="text" [(ngModel)]="filter.numberOfRoomsTo" />
-    </mat-form-field>
-    <label>Creation date</label>
-    <input type="date" [(ngModel)]="filter.dateFrom" />
-    <input type="date" [(ngModel)]="filter.dateTo" />
-
-    <mat-radio-group [(ngModel)]="filter.isForRent">
-        <mat-radio-button [value]="true">Rent</mat-radio-button>
-        <mat-radio-button [value]="false">Sale</mat-radio-button>
-    </mat-radio-group>
-    <mat-form-field>
+    <mat-form-field class="middle">
         <mat-label>
-            Districts
+            District
         </mat-label>
         <mat-select [(ngModel)]="filter.district">
-            <mat-option [value]=""></mat-option>
+            <mat-option [value]="">All</mat-option>
             <ng-container *ngFor="let item of districts">
                 <mat-option [value]="item.name">{{ item.name }}</mat-option>
             </ng-container>
         </mat-select>
     </mat-form-field>
     <div class="buttons">
-        <button mat-raised-button (click)="getResults()">Show</button>
+        <button mat-flat-button (click)="getResults()">Show</button>
     </div>
 </div>

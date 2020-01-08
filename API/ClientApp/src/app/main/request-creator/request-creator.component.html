@@ -1,36 +1,65 @@
 <div class="creator">
     <form [formGroup]="requestData" novalidate (ngSubmit)="CreateRequest()">
-        <div class="row">
-        <mat-form-field class="login-form__field-set">
-            <input matInput formControlName="header" placeholder="Header" />
-        </mat-form-field>
-    </div>
-        <div class="row">
-        <mat-form-field class="login-form__field-set">
-            <textarea  matInput formControlName="body" placeholder="Body" >
-            </textarea>
-        </mat-form-field>
-    </div>
-        <mat-form-field class="login-form__field-set">
-            <input matInput formControlName="square" placeholder="Square" />
-        </mat-form-field>
-        <mat-form-field class="login-form__field-set">
-            <input matInput formControlName="numberOfRooms" placeholder="Number of rooms"/>
-        </mat-form-field>
-
-        <mat-form-field class="login-form__field-set" >
-            <mat-select formControlName="district" placeholder="district">
-                <ng-container *ngFor="let item of districts">
-                    <mat-option value="item.name">{{ item.name }}</mat-option>
-                </ng-container>
-            </mat-select>
-        </mat-form-field>
         <div>
-            <mat-radio-group formControlName="isForRent">
-                <mat-radio-button value="true">Rent</mat-radio-button>
-                <mat-radio-button value="false">Sell</mat-radio-button>
-            </mat-radio-group>
+            <mat-form-field class="input-form">
+                <input
+                    matInput
+                    formControlName="header"
+                    placeholder="Header of your request"
+                />
+            </mat-form-field>
         </div>
-        <button type="submit">Send</button>
+        <div>
+            <mat-form-field class="input-form">
+                <textarea
+                    matInput
+                    matTextareaAutosize="true"
+                    formControlName="body"
+                    placeholder="Type some details about house"
+                >
+                </textarea>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input
+                        matInput
+                        formControlName="square"
+                        placeholder="Square"
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input
+                        matInput
+                        formControlName="numberOfRooms"
+                        placeholder="Number of rooms"
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <mat-select
+                        formControlName="district"
+                        placeholder="district"
+                    >
+                        <ng-container *ngFor="let item of districts">
+                            <mat-option [value]="item.name">{{
+                                item.name
+                            }}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-radio-group formControlName="isForRent">
+                    <mat-radio-button value="true">Rent</mat-radio-button>
+                    <mat-radio-button value="false">Sell</mat-radio-button>
+                </mat-radio-group>
+            </div>
+        </div>
+        <button mat-raised-button type="submit">Create</button>
     </form>
 </div>

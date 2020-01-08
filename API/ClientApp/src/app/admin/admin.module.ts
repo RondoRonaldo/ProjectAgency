@@ -7,6 +7,7 @@ import { AdminHeaderComponent } from './admin-header/admin-header.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DistrictComponent } from './district/district.component';
+import { MatInputModule, MatButtonModule } from '@angular/material';
 
 
 
@@ -16,7 +17,9 @@ import { DistrictComponent } from './district/district.component';
       CommonModule,
       FormsModule,
     AdminRoutingModule,
-    RouterModule
+    RouterModule,
+    MatInputModule,
+    MatButtonModule
   ],
   providers:[AdminService]
 })

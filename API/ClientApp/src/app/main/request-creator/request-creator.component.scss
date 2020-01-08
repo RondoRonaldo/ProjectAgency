@@ -1,5 +1,21 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
+.creator
+{
+    background-color: lightgray;
+  margin: auto;
+    border: 0.5px solid darkgray;
+    width: 40%;
+    border-radius: 10px;
+    margin-top: 15px;
+    padding: 20px;
+    .input-form
+    {
+        width:100%;
+
+    }
+
+
+    .mat-form-field-infix
+    {
+        width: 100%;
+    }
+}

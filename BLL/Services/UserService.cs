@@ -1,4 +1,5 @@
-﻿using API_Contracts.Models.UserModels;
+﻿using System;
+using API_Contracts.Models.UserModels;
 using AutoMapper;
 using BLL.Infrastructure;
 using BLL.Interfaces;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Castle.Core.Internal;
 
 namespace BLL.Services
 {
@@ -17,7 +19,7 @@ namespace BLL.Services
         private readonly IUnitOfWork _uow;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        
+
         public UserService(IUnitOfWork unitOfWork, IMapper mapper, IHttpContextAccessor httpContextAccessor)
         {
             _mapper = mapper;
@@ -27,17 +29,20 @@ namespace BLL.Services
 
         public async Task<UserProfileEntity> GetUserProfileEntityAsync()
         {
-             var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        
+            var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (id.IsNullOrEmpty())
+            {
+                throw new ArgumentNullException();
+            }
             return await _uow.UserProfileRepository.GetAsync(id);
         }
 
         public async Task<ApplicationUserEntity> GetApplicationUserAsync()
         {
-           var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var id = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return await _uow.UserManager.FindByIdAsync(id);
         }
-        
+
         public async Task<ProfileModel> GetProfileModelAsync()
         {
             var profile = await GetUserProfileEntityAsync();            

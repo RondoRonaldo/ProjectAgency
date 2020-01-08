@@ -1,0 +1,13 @@
+.border-05px
+{
+    border: 1px solid darkgrey;
+    border-radius: 10px;
+    margin: auto;
+    width: 370px;
+    margin-top: 15px;
+    padding: 15px;
+    background-color: lightgray;
+    .mat-raised-button{
+        margin:5px;
+    }
+}

@@ -1,33 +1,67 @@
-<div>{{ requestData.header }}</div>
-<div>{{ requestData.body }}</div>
-<div>
-    <label>Total square</label>
-    {{ requestData.square }}
-</div>
-<div>
-    <label>Number of rooms</label>
-    {{ requestData.numberOfRooms }}
-</div>
-<div>{{ requestData.creationDate | date: "yyyy/mm/dd" }}</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="request-container">
+            <div class="row">
+                <h4 class="col-md-9">
+                    <div>{{ requestData.header }}</div>
+                </h4>
+                <div class="col-md-3">
+                    {{ requestData.creationDate | date: "yyyy LLLL dd" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    {{ requestData.body }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    {{ requestData.district }}
+                </div>
+                <div class="col-md-3">
+                    {{ requestData.isForRent ? "Rent" : "Sale" }}
+                </div>
+            </div>
 
-<ng-container *ngFor="let item of requestData.comments">
-    <div>
-        <label>Name</label>
-        {{item.userInfo.name}}
-        <label>phoneNumber</label>
-        {{item.userInfo.phoneNumber}}
-        <div>
-            {{ item.body }}
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Square -</label>
+                    {{ requestData.square }} m<sup>2</sup>
+                </div>
+                <div class="col-md-3">
+                    <label>Rooms</label>
+                    {{ requestData.numberOfRooms }}
+                </div>
+            </div>
         </div>
     </div>
-</ng-container>
+    <div class="col-md-5">
+        <div class="comment-container">
+            <form>
+                <label>Enter your comment</label>
+                <mat-form-field>
+                    <input
+                        matInput
+                        type="text"
+                        name="comment"
+                        [(ngModel)]="commentData.body"
+                    />
+                </mat-form-field>
+                <button mat-flat-button (click)="addComment()">Send</button>
+            </form>
+            <ng-container *ngFor="let item of requestData.comments">
+                <div class="border-05px">
+                    <div class="row">
+                            {{ item.userInfo.name }}
+                            <label>tel:</label>
+                            {{ item.userInfo.phoneNumber }}
 
-<form>
-    <label>Enter your comment</label>
-    <input
-        type="text"
-        name="Comment"
-        [(ngModel)]="commentData.body"
-    />
-    <button type="button" (click)="addComment()">Send</button>
-</form>
+                    </div>
+                    <div class="row">
+                        {{ item.body }}
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>

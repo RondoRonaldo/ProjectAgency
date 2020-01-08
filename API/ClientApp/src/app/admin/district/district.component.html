@@ -1,12 +1,24 @@
-<div>
-    <ng-container *ngFor="let item of districtData; index as i">
-        <input type="text" [(ngModel)]="item.name" />
-        <button type="button" (click)="updateDistrict(i)">Edit</button>
-        <button type="button" (click)="deleteDistrict(item.id)">Delete</button>
-    </ng-container>
-</div>
+<div class="border-05px">
+    <div>
+        <ng-container *ngFor="let item of districtData; index as i">
+            <div>
+                <mat-form-field>
+                    <input matInput type="text" [(ngModel)]="item.name" />
+                </mat-form-field>
+                <button mat-raised-button (click)="updateDistrict(i)">
+                    Edit
+                </button>
+                <button mat-raised-button (click)="deleteDistrict(item.id)">
+                    Delete
+                </button>
+            </div>
+        </ng-container>
+    </div>
 
-<div>
-    <input type="text" [(ngModel)]="district.name" />
-    <button type="button" (click)="createDistrict()">Create</button>
+    <div>
+        <mat-form-field>
+            <input matInput type="text" [(ngModel)]="district.name" />
+        </mat-form-field>
+        <button mat-raised-button (click)="createDistrict()">Create</button>
+    </div>
 </div>

@@ -1,18 +1,55 @@
 .filter{
-    margin-left: 15px;
+    margin-top: -3px;
+    background-color: lightgray;
+    border:  1px solid;
+    border-radius: 10px;
+    border-color: darkgrey;
+    .labels
+    {
+        display: flex;
+
+        justify-content: center;
+    }
+
+    .w-auto
+    {
+        margin: 0px;
+    }
+    .middle
+    {
+        margin-left: 30px;
+    }
 }
 
-.inputs{
-        width:30px;
+fieldset{
+
+    border-color: darkgrey !important;
+    border-radius: 10px;
+    margin: 5px;
+}
+legend{
+    font-size: 1rem;
 }
 .buttons
 {
-    display: flex;
-    justify-content: center;
+    margin-left: 35%;
+    margin-bottom: 15px;
+width: 100%;
 }
 
-.divs{
-    border: 0.5px solid darkgray;
-    border-radius: 5px;
-    width: 140px;
+.border-05px
+{
+    border:  1px solid;
+    border-color: darkgrey;
+    border-radius: 10px;
+    margin: 5px;
+    .radio{
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+        margin: 5px 0;
+        &__button{
+            margin: 5px;
+        }
+    }
 }

@@ -1,0 +1,35 @@
+.request-container {
+    padding: 10px;
+    background-color: lightgray;
+    border: 0.5px solid darkgray;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    margin-left: 40px;
+    .row {
+        margin: 0px;
+
+        h4 {
+            a {
+                color: #0366d6;
+            }
+        }
+    }
+}
+.comment-container {
+    padding: 10px;
+    background-color: lightgray;
+    border: 0.5px solid darkgray;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    margin-top: 15px;
+    .row {
+        margin-left: 8px;
+    }
+}
+.border-05px {
+    border: 1px solid;
+    border-color: darkgrey;
+    border-radius: 10px;
+    margin: 5px;
+}

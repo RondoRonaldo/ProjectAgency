@@ -2,8 +2,9 @@
     padding: 10px;
     background-color: lightgray;
     border: 0.5px solid darkgray;
-    margin-bottom: 5px;
-    margin-top: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-radius: 15px;
 
     .row {
         margin: 0px;
@@ -16,3 +17,6 @@
     }
 }
 
+.moderation {
+    margin: 5px;
+}
