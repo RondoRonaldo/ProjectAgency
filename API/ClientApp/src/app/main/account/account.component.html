@@ -1,25 +1,75 @@
-<div>
-<label>Change password</label>
-<form [formGroup]="passwordForm" novalidate (ngSubmit)="UpdateUserPassword()">
-<input type="password" formControlName="oldPassword" placeholder="old password">
-<div formGroupName="newPasswords">
+<div class="account-container">
+    <fieldset class="border p-2">
+        <legend class="w-auto">Change password</legend>
+        <form
+            [formGroup]="passwordForm"
+            novalidate
+            (ngSubmit)="UpdateUserPassword()"
+        >
+            <mat-form-field>
+                <input
+                    matInput
+                    type="password"
+                    formControlName="oldPassword"
+                    placeholder="old password"
+                />
+            </mat-form-field>
+            <div formGroupName="newPasswords">
+                <mat-form-field>
+                    <input
+                        matInput
+                        type="password"
+                        formControlName="password"
+                        placeholder="new password"
+                    />
+                </mat-form-field>
+                <div>
+                    <mat-form-field>
+                        <input
+                            matInput
+                            type="password"
+                            formControlName="confirmPassword"
+                            placeholder="confirm password"
+                        />
+                    </mat-form-field>
+                </div>
+            </div>
+            <button mat-flat-button [disabled]="passwordForm.invalid">
+                Update
+            </button>
+        </form>
+    </fieldset>
+    <form
+        [formGroup]="personalInfoForm"
+        novalidate
+        (ngSubmit)="UpdateUserInfo()"
+    >
+        <fieldset class="border p-2">
+            <legend class="w-auto">User information</legend>
+            <mat-form-field>
+                <input matInput type="text" formControlName="name" />
+                <mat-hint>Name</mat-hint>
+            </mat-form-field>
+            <div
+                class="alert-group"
+                *ngIf="
+                    personalInfoForm.controls['name'].touched &&
+                    (personalInfoForm.controls['name'].hasError('minlength') ||
+                        personalInfoForm.controls['name'].hasError('maxlength'))
+                "
+            >
+                Name must have minimum 3 letters and 15 maximum
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput type="text" formControlName="phoneNumber" />
+                    <mat-hint>Phone number</mat-hint>
+                </mat-form-field>
+            </div>
 
-    <input type="password" formControlName="password" placeholder="new password">
-    <input type="password" formControlName="confirmPassword" placeholder="confirm password">
+            <button mat-flat-button [disabled]="personalInfoForm.invalid">
+                Update
+            </button>
+        </fieldset>
+    </form>
 </div>
-<button type="submit" [disabled]="passwordForm.invalid">Update</button>
-</form>
-
-<form [formGroup]="personalInfoForm" novalidate (ngSubmit)="UpdateUserInfo()">
-    <label>Name</label>
-    <input type="text" formControlName="name">
-    <div class="alert-group" *ngIf="personalInfoForm.controls['name'].touched &&
-    (personalInfoForm.controls['name'].hasError('minlength') || personalInfoForm.controls['name'].hasError('maxlength'))" >
-        Name must have minimum 3 letters and 15 maximum
-    </div>
-    <label>Phone number</label>
-<input type="text" formControlName="phoneNumber">
-<button type="submit" [disabled]="personalInfoForm.invalid">Update</button>
-</form>
-</div>
-

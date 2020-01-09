@@ -3,15 +3,17 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { RegistrationModel } from './registration.model';
 import { RegistrationService } from './registration.service';
 import { passwordMatchValidator } from './registration.validators';
+import { NotificationService } from 'src/app/core/notifications/notification.service';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-registration',
     templateUrl: './registration.component.html',
     styleUrls: ['./registration.component.scss'],
     providers: [RegistrationService, FormBuilder]
 })
-export class RegistrationComponent  {
+export class RegistrationComponent {
     public userData: FormGroup;
-public passwords: FormGroup;
+    public passwords: FormGroup;
 
     public phoneMask = ['(', /[0-9]/, /\d/, /\d/, ')', '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
     public showPassword = false;
@@ -21,7 +23,7 @@ public passwords: FormGroup;
 
 
 
-    constructor(private _registration: RegistrationService, private _fb: FormBuilder) {
+    constructor(private _registration: RegistrationService, private _fb: FormBuilder, private notification: NotificationService, private router: Router) {
         this.passwords = this._fb.group({
             password: new FormControl('', [Validators.required, Validators.minLength(8)]),
             confirmPassword: new FormControl('', [Validators.required]),
@@ -41,10 +43,11 @@ public passwords: FormGroup;
 
 
     public Register(): void {
-let data =this.userData.value as RegistrationModel;
-    data.password = this.passwords.controls['password'].value;
-    data.confirmPassword = this.passwords.controls['confirmPassword'].value;
-        this._registration.signUp(data).subscribe();
+        let data = this.userData.value as RegistrationModel;
+        data.password = this.passwords.controls['password'].value;
+        data.confirmPassword = this.passwords.controls['confirmPassword'].value;
+        this._registration.signUp(data).subscribe(() =>
+            this.router.navigate(['..', 'main', 'dashboard']), error => this.notification.error("Email already exists"));
     }
 
 }

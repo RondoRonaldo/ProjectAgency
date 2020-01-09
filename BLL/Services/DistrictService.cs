@@ -6,6 +6,7 @@ using API_Contracts.Models.DistrictModels;
 using AutoMapper;
 using BLL.Infrastructure;
 using BLL.Interfaces;
+using Castle.Core.Internal;
 using DAL.Entities;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,52 +23,50 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<OperationDetails> CreateAsync(DistrictModel model)
+        public async Task CreateAsync(DistrictModel model)
         {
             if (model == null)
             {
-                //throw new ArgumentNullException(nameof(model));
+                throw new ArgumentNullException(nameof(model));
             }
-            
-            // TODO: rename
-            var foo = (await _uow.DistrictRepository.FindAsync(opt => opt.Name == model.Name)).FirstOrDefault();
 
-            if (foo != null)
+            var entity = (await _uow.DistrictRepository.FindAsync(opt => opt.Name == model.Name)).FirstOrDefault();
+
+            if (entity != null)
             {
-                return new OperationDetails(false, "District already exists", string.Empty);
+               throw new ArgumentNullException(nameof(entity));
             }
 
             await _uow.DistrictRepository.CreateAsync(new DistrictEntity { Name = model.Name });
             await _uow.SaveAsync();
-            return new OperationDetails(true, "ok", string.Empty);
         }
 
-        public async Task<OperationDetails> UpdateAsync(DistrictDashboardModel model)
+        public async Task UpdateAsync(DistrictDashboardModel model)
         {
-            if (model?.Id == null)
+            if (model == null)
             {
-                return new OperationDetails(false, "District  was not found", string.Empty);
+               throw new ArgumentNullException(nameof(model)); 
             }
-            
+
+            if (string.IsNullOrEmpty(model.Id))
+            {
+                throw new ArgumentNullException(nameof(model.Id));
+            }
 
             var result = _mapper.Map<DistrictEntity>(model);
             _uow.DistrictRepository.Update(result);
             await _uow.SaveAsync();
-
-            return new OperationDetails(true, "District was updated", string.Empty);
         }
 
-        public async Task<OperationDetails> RemoveAsync(string id)
+        public async Task RemoveAsync(string id)
         {
-            if (id == null)
+            if (id.IsNullOrEmpty())
             {
-                return new OperationDetails(true, "District id was not found", string.Empty);
+                throw new ArgumentNullException(nameof(id));
             }
             var district = await _uow.DistrictRepository.GetAsync(id);
             _uow.DistrictRepository.Remove(district);
             await _uow.SaveAsync();
-
-            return new OperationDetails(true, "District was deleted", string.Empty);
         }
 
         public async Task<List<DistrictDashboardModel>> GetAsync()

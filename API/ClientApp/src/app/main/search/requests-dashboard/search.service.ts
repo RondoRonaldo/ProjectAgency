@@ -5,9 +5,9 @@ import { tap } from 'rxjs/operators';
 
 import { PageRequestModel, PageModel } from 'src/app/shared/pagination/page.model';
 
-import { RequestDashboardModel } from '../../dashboard/manager-requests/request-dashboard.model';
 import { AdminFilterModel, UserFilterModel } from '../request-filter/filter.model';
 import { RequestModerationModel } from './request-moderation.model';
+import { RequestDashboardModel } from './request-dashboard.model';
 
 @Injectable({
     providedIn: 'root'

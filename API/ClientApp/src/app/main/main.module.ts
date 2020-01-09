@@ -11,12 +11,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from '../shared/shared.module';
 import { MainService } from './main.service';
 import { RequestFilterComponent } from './search/request-filter/request-filter.component';
-import { RequestListItemComponent } from './dashboard/manager-requests/request-list-item/request-list-item.component';
 
 
 
 @NgModule({
-    declarations: [MainComponent, userRouterComponents, RequestFilterComponent, HeaderComponent, RequestListItemComponent],
+    declarations: [MainComponent, userRouterComponents, RequestFilterComponent, HeaderComponent],
     imports: [
         CommonModule,
         SharedModule,

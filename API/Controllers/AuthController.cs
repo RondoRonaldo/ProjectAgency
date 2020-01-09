@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// Authentication
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : Controller
@@ -17,26 +20,40 @@ namespace API.Controllers
             _userService = userService;
         }
 
-
+        /// <summary>
+        /// Register using credentials
+        /// </summary>
+        /// <param name="model">User credentials</param>
+        /// <response code="200"></response>
+        /// <response code="400"></response>
         [HttpPost("registration")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
         {
-            if (!ModelState.IsValid) return StatusCode(400, "Invalid Model");
+            if (!ModelState.IsValid) return StatusCode(400);
 
-            var result = await _userService.CreateAsync(model);
+            await _userService.CreateAsync(model);
 
-            return StatusCode(result.Succeeded ? 200 : 400, result.Message);
+            return StatusCode(200);
         }
 
-
+        /// <summary>
+        /// Login using credentials
+        /// </summary>
+        /// <param name="model">User credentials</param>
+        /// <response code="200"></response>
+        /// <response code="400"></response>
         [HttpPost("login")]
         public async Task<IActionResult> SignInAsync([FromBody] LoginModel model)
         {
-            if (!ModelState.IsValid) return StatusCode(400, "Wrong parameters");
-            var result = await _userService.SignInAsync(model);
-            return StatusCode(result.Succeeded ? 200 : 401);
+            if (!ModelState.IsValid) return StatusCode(400);
+            await _userService.SignInAsync(model);
+            return StatusCode(200);
         }
 
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <response code="200"></response>
         [Authorize]
         [HttpPost("logout")]
         public async Task<IActionResult> LogOutAsync()

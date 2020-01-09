@@ -12,15 +12,15 @@ import { MatInputModule, MatButtonModule } from '@angular/material';
 
 
 @NgModule({
-  declarations: [AdminComponent,AdminHeaderComponent,DistrictComponent],
-  imports: [
-      CommonModule,
-      FormsModule,
-    AdminRoutingModule,
-    RouterModule,
-    MatInputModule,
-    MatButtonModule
-  ],
-  providers:[AdminService]
+    declarations: [AdminComponent, AdminHeaderComponent, DistrictComponent],
+    imports: [
+        CommonModule,
+        FormsModule,
+        AdminRoutingModule,
+        RouterModule,
+        MatInputModule,
+        MatButtonModule
+    ],
+    providers: [AdminService]
 })
 export class AdminModule { }

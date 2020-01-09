@@ -1,4 +1,4 @@
-export class notificationModel{
-	type: string;
-	text: string;
+export class notificationModel {
+    type: string;
+    text: string;
 }

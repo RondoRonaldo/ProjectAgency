@@ -1,7 +1,7 @@
 export class ProfileModel {
-	email: string;
+    email: string;
     name: string;
     phoneNumber: string;
-	role: string;
+    role: string;
 }
 

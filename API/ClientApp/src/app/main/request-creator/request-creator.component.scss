@@ -1,21 +1,19 @@
-.creator
-{
+.creator {
     background-color: lightgray;
-  margin: auto;
+    margin: auto;
     border: 0.5px solid darkgray;
-    width: 40%;
+    width: 800px;
     border-radius: 10px;
     margin-top: 15px;
     padding: 20px;
-    .input-form
-    {
-        width:100%;
-
+    .input-form {
+        width: 100%;
+    }
+    textarea {
+        overflow: hidden;
     }
 
-
-    .mat-form-field-infix
-    {
+    .mat-form-field-infix {
         width: 100%;
     }
 }

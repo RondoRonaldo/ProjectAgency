@@ -58,7 +58,7 @@ namespace BLL.Services
             return _mapper.Map<UserInfoModel>(user);
         }
 
-        public async Task<OperationDetails> CreateAsync(RegisterModel model)
+        public async Task CreateAsync(RegisterModel model)
         {
 
             if ((await _uow.RoleManager.FindByNameAsync("admin")) == null)
@@ -82,7 +82,7 @@ namespace BLL.Services
 
             if (user != null)
             {
-                return new OperationDetails(false, "Email is already used", "Email");
+                throw new ArgumentException("Email is already used");
             }
 
             var userIdentity = new ApplicationUserEntity
@@ -92,25 +92,32 @@ namespace BLL.Services
                 UserProfile = _mapper.Map<UserProfileEntity>(model)
             }; 
 
-            await _uow.UserManager.CreateAsync(userIdentity, model.Password);
+            await _uow.UserManager.CreateAsync(userIdentity, model.Password); 
             await _uow.UserManager.AddToRoleAsync(userIdentity, "user");
             await _uow.SaveAsync();
-            return new OperationDetails(true, "User created", string.Empty);
+            var logInModel = _mapper.Map<LoginModel>(model);
+            await SignInAsync(logInModel);
         }
 
-        public async Task<OperationDetails> UpdateAsync(UserInfoModel model)
+        public async Task UpdateAsync(UserInfoModel model)
         {
+            if (model == null) 
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
             var user = await GetUserProfileEntityAsync();
             user = _mapper.Map(model, user); 
             _uow.UserProfileRepository.Update(user);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "Updated successfully", string.Empty);
         }
 
-        public async Task<OperationDetails> SignInAsync(LoginModel model)
+        public async Task SignInAsync(LoginModel model)
         {
             var result = await _uow.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.IsPersistent, false);
-            return new OperationDetails(result.Succeeded, result.Succeeded ? "Authenticated" : "Incorrect username and/or password", string.Empty);
+            if (result == SignInResult.Failed)
+            {
+                throw new ArgumentException("Incorrect username and/or password");
+            }
         }
 
         public async Task SignOutAsync()
@@ -118,21 +125,19 @@ namespace BLL.Services
             await _uow.SignInManager.SignOutAsync();
         }
 
-        public async Task<OperationDetails> DeleteUserAsync()
+        public async Task DeleteUserAsync()
         {
-            var user = await GetApplicationUserAsync();
-            var result = await _uow.UserManager.DeleteAsync(user);
+            var user = await GetApplicationUserAsync(); 
+            await _uow.UserManager.DeleteAsync(user);
             await _uow.SaveAsync();
-            return new OperationDetails(result.Succeeded, result.Succeeded ? "Deleted successfully" : "Can not delete user,try later", string.Empty);
 
         }
 
-        public async Task<OperationDetails> ChangePasswordAsync(PasswordModel model)
+        public async Task ChangePasswordAsync(PasswordModel model)
         {
             var user = await GetApplicationUserAsync();
             await _uow.UserManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "Password updated", string.Empty);
         }
     }
 }

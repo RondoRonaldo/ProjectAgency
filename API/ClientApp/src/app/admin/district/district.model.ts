@@ -1,8 +1,7 @@
-export class DistrictModel{
+export class DistrictModel {
     name: string;
 }
 
-
-export class DistrictDashboardModel extends DistrictModel{
+export class DistrictDashboardModel extends DistrictModel {
     id: string;
-    }
+}

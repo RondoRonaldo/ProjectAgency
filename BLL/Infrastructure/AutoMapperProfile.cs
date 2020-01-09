@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using API_Contracts.Models.CommentModels;
 using API_Contracts.Models.DistrictModels;
 using API_Contracts.Models.RequestModels;
@@ -10,6 +8,9 @@ using DAL.Entities;
 
 namespace BLL.Infrastructure
 {
+    /// <summary>
+    /// AutoMapper configuration
+    /// </summary>
     public class AutoMapperProfile : Profile
     {
         public AutoMapperProfile()
@@ -20,6 +21,7 @@ namespace BLL.Infrastructure
                 .ForMember(dest => dest.UserInfo, opt => opt.MapFrom(src => src.UserProfile));
             CreateMap<RegisterModel, UserProfileEntity>();
             CreateMap<UserInfoModel, UserProfileEntity>();
+            CreateMap<RegisterModel, LoginModel>();
             CreateMap<RequestModel, RequestEntity>()
                 .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => DateTime.Now))
                 .ForMember(opt => opt.District, opt => opt.Ignore());
@@ -30,7 +32,6 @@ namespace BLL.Infrastructure
             CreateMap<UserProfileEntity, UserInfoModel>();
             CreateMap<RequestUpdateModel, RequestEntity>()
                 .ForMember(dest => dest.CreationDate, opt => opt.MapFrom(src => DateTime.Now));
-      
             CreateMap<CommentModel, CommentEntity>();
             CreateMap<CommentEntity, CommentDashboardModel>()
                 .ForMember(dest => dest.UserInfo, opt => opt.MapFrom(x => x.UserProfile));

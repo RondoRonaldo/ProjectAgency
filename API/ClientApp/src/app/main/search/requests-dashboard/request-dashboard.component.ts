@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from './search.service';
-import { RequestDashboardModel } from '../../dashboard/manager-requests/request-dashboard.model';
 import { AdminService } from 'src/app/admin/admin.service';
 import { RequestModerationModel } from './request-moderation.model';
+import { RequestDashboardModel } from './request-dashboard.model';
+import { NotificationService } from 'src/app/core/notifications/notification.service';
 
 @Component({
     selector: 'app-request-dashboard',
@@ -13,7 +14,7 @@ export class RequestSearchComponent implements OnInit {
     public isAdmin: boolean;
     public totalRecords: number;
     public data: RequestDashboardModel[];
-    constructor(private _search: SearchService, private _adminService: AdminService) {
+    constructor(private _search: SearchService, private _adminService: AdminService,private notification: NotificationService) {
         this.adminCheck();
     }
 
@@ -29,7 +30,7 @@ export class RequestSearchComponent implements OnInit {
 
     public moderateRequest(requestId: string,isAccepted: boolean) {
         var request = new RequestModerationModel(requestId,isAccepted);
-        this._search.requestModeration(request).subscribe();
+        this._search.requestModeration(request).subscribe(()=>this.notification.success('Status updated.'), error => this.notification.error("Something went wrong, try later"));
     }
 
 }

@@ -1,39 +1,39 @@
-@import '../../../assets/styles/color.variables.scss';
+@import "../../../assets/styles/color.variables.scss";
 .header {
-	display: flex;
-	justify-content: space-between;
-	height: 50px;
-	color: $primary-title-font-color;
-	background: $primary-application-color;
-	&__nav-item {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    color: $primary-title-font-color;
+    background: $primary-application-color;
+    &__nav-item {
         display: flex;
         width: 100%;
-	}
-	&__item {
-		font-size: 20px;
-		margin: 0 20px;
-		align-self: center;
-		border: transparent 2px solid;
-		&:hover {
-			border-bottom: $primary-title-font-color 2px solid;
-		}
-	}
-	&__logout {
-		margin: 10px;
-		padding-right: 10px;
+    }
+    &__item {
+        font-size: 20px;
+        margin: 0 20px;
+        align-self: center;
+        border: transparent 2px solid;
+        &:hover {
+            border-bottom: $primary-title-font-color 2px solid;
+        }
+    }
+    &__logout {
+        margin: 10px;
+        padding-right: 10px;
         cursor: pointer;
-	}
-	&__link {
-		text-decoration: none;
-		color: $primary-title-font-color;
-		cursor: pointer;
     }
-    &__user-info{
+    &__link {
+        text-decoration: none;
+        color: $primary-title-font-color;
+        cursor: pointer;
+    }
+    &__user-info {
         justify-content: flex-end;
-    flex: 1;
-    display: flex;
+        flex: 1;
+        display: flex;
     }
-	.active-link {
-		border-bottom: $primary-title-font-color 2px solid;
-	}
+    .active-link {
+        border-bottom: $primary-title-font-color 2px solid;
+    }
 }

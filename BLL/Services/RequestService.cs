@@ -27,14 +27,13 @@ namespace BLL.Services
         }
 
 
-        public async Task<OperationDetails> CreateAsync(RequestModel requestModel)
+        public async Task CreateAsync(RequestModel requestModel)
         {
-
             var district = (await _uow.DistrictRepository.FindAsync(exp => exp.Name == requestModel.District))
                 .FirstOrDefault();
             if (district == null)
             {
-                return new OperationDetails(false, "District was not found", string.Empty);
+                throw new ArgumentNullException(nameof(district));
             }
             var userProfile = await _userService.GetUserProfileEntityAsync();
             var request = _mapper.Map<RequestModel, RequestEntity>
@@ -48,7 +47,6 @@ namespace BLL.Services
 
             await _uow.RequestRepository.CreateAsync(request);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "Created successfully", string.Empty);
         }
 
 
@@ -73,57 +71,61 @@ namespace BLL.Services
         public async Task<RequestDashboardModel> GetAsync(string id)
         {
             var result = await _uow.RequestRepository.GetAsync(id);
-
             return _mapper.Map<RequestDashboardModel>(result);
         }
 
-        public async Task<OperationDetails> RemoveAsAdminAsync(string id)
+        public async Task RemoveAsAdminAsync(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
-                // TODO: throw ArgumentEx("")
-                return new OperationDetails(false, "Request id doesn't exist", string.Empty);
+              throw new ArgumentNullException(nameof(id));
             }
 
             var result = await _uow.RequestRepository.GetAsync(id);
-
-            return await RemoveAsync(result);
+            await RemoveAsync(result);
         }
 
-        public async Task<OperationDetails> RemoveAsyncAsUser(string id)
+        public async Task RemoveAsyncAsUser(string id)
         {
-            var result = await _uow.RequestRepository.GetAsync(id);
+            if (string.IsNullOrEmpty(id))
             {
-                if (result == null) return new OperationDetails(false, "Request id doesn't exist", string.Empty);
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            var result = await _uow.RequestRepository.GetAsync(id);
+            
+                if (result == null)
+            {
+                throw new ArgumentNullException(nameof(result));
             }
 
             if (result.UserProfile.Id != (await _userService.GetUserProfileEntityAsync()).Id)
             {
-                return new OperationDetails(false, "Permission denied", string.Empty);
+                throw new ArgumentException();
             }
 
-            return await RemoveAsync(result);
+            await RemoveAsync(result);
         }
 
-        public async Task<OperationDetails> UpdateAsyncAsUser(RequestUpdateModel model)
+        public async Task UpdateAsyncAsUser(RequestUpdateModel model)
         {
             if (model is null) throw new ArgumentNullException(nameof(model));
 
-            //if ((await _userService.GetUserProfileEntityAsync()).Id != model.UserProfileId)   - TODO
-            //{
-            //    return new OperationDetails(false, "Permission denied", string.Empty);
-            //}
-            return await UpdateAsync(model);
+            if ((await _userService.GetUserProfileEntityAsync()).Id != model.Id) 
+            {
+                throw new ArgumentException();
+            }
+            await UpdateAsync(model);
         }
 
-        public async Task<OperationDetails> UpdateAsyncAsAdmin(RequestUpdateModel model)
+        public async Task UpdateAsyncAsAdmin(RequestUpdateModel model)
         {
             if (model == null)
             {
-                return new OperationDetails(false, "model is null", string.Empty);
+                throw new ArgumentNullException(nameof(model));
             }
 
-            return await UpdateAsync(model);
+            await UpdateAsync(model);
         }
 
 
@@ -200,30 +202,28 @@ namespace BLL.Services
                 _mapper.Map<IEnumerable<RequestDashboardModel>>(resultsPerPage), result.Count());
         }
 
-        private async Task<OperationDetails> RemoveAsync(RequestEntity result)
+        private async Task RemoveAsync(RequestEntity result)
         {
             _uow.RequestRepository.Remove(result);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "Request was deleted", string.Empty);
         }
 
-        private async Task<OperationDetails> UpdateAsync(RequestUpdateModel model)
+        private async Task UpdateAsync(RequestUpdateModel model)
         {
             var result = _mapper.Map<RequestEntity>(model);
             _uow.RequestRepository.Update(result);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "Request was updated", string.Empty);
         }
 
-        public async Task<OperationDetails> ModerateRequestAsync(RequestModerationModel model)
+        public async Task ModerateRequestAsync(RequestModerationModel model)
         {
             if (model == null)
             {
-                return new OperationDetails(false, "null model", string.Empty);
+                throw new ArgumentNullException(nameof(model));
             }
             if (string.IsNullOrEmpty(model.RequestId))
             {
-                return new OperationDetails(false, "Request id is null", string.Empty);
+                throw new ArgumentNullException(nameof(model.RequestId));
             }
 
             var request = await _uow.RequestRepository.GetAsync(model.RequestId);
@@ -231,7 +231,6 @@ namespace BLL.Services
             request.IsModerated = true;
             _uow.RequestRepository.Update(request);
             await _uow.SaveAsync();
-            return new OperationDetails(true, "request updated", string.Empty);
         }
 
 

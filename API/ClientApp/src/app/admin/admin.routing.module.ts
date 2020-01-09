@@ -6,20 +6,20 @@ import { AdminGuard } from './admin.guard';
 import { DistrictComponent } from './district/district.component';
 
 const adminRoutes: Routes = <Routes>[
-	{
-path: 'admin', component: AdminComponent,canActivate: [AdminGuard],children:
-[
-{path: 'districts', component: DistrictComponent}
+    {
+        path: 'admin', component: AdminComponent, canActivate: [AdminGuard], children:
+            [
+                { path: 'districts', component: DistrictComponent }
 
-]
+            ]
     }];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(adminRoutes)
-  ]
+    declarations: [],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(adminRoutes)
+    ]
 })
 
 

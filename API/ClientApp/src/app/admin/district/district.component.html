@@ -3,7 +3,7 @@
         <ng-container *ngFor="let item of districtData; index as i">
             <div>
                 <mat-form-field>
-                    <input matInput type="text" [(ngModel)]="item.name" />
+                    <input matInput minlength="5" maxlength="20" type="text" [(ngModel)]="item.name" />
                 </mat-form-field>
                 <button mat-raised-button (click)="updateDistrict(i)">
                     Edit
@@ -17,7 +17,7 @@
 
     <div>
         <mat-form-field>
-            <input matInput type="text" [(ngModel)]="district.name" />
+            <input matInput type="text" minlength="5" maxlength="20" [(ngModel)]="district.name" />
         </mat-form-field>
         <button mat-raised-button (click)="createDistrict()">Create</button>
     </div>
