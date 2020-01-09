@@ -29,7 +29,7 @@ export class RequestCreatorComponent {
     }
 
     public CreateRequest(): void {
-        this._requestService.CreateRequest(this.requestData.value).subscribe(()=>this.notification.success('Test created.'), error => this.notification.error("Something went wrong, try later"));
+        this._requestService.CreateRequest(this.requestData.value).subscribe(()=>this.notification.success('Request created.'), error => this.notification.error("Something went wrong, try later"));
     }
 
     public getDistricts()
