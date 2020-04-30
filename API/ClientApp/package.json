@@ -30,7 +30,7 @@
     "aspnet-prerendering": "^3.0.1",
     "bootstrap": "^4.4.1",
     "core-js": "^2.6.10",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "material-design-icons": "^3.0.1",
     "ngx-cookie-service": "^2.2.0",
     "oidc-client": "^1.9.1",
